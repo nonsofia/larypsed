@@ -60,6 +60,7 @@ div.slideshow a.advance-link:hover, div.slideshow a.advance-link:active, div.sli
 }
 div.slideshow img {
 	vertical-align: middle;
+    height: 420px;
 /* 	border: 1px solid #ccc; */
 }
 div.download {
