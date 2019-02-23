@@ -1,20 +1,21 @@
 #!/usr/bin/perl
 
 while (<STDIN>) { 
-	my $filename = $_;
-	chomp $filename;
+	my $drawing = $_;
+	chomp $drawing;
 	
-	my ($title, $size, $year, $year2) = $filename =~ /^([a-z ]*) ([0-9][0-9][0-9] cm) ?\(diagonal\)? ?([0-9][0-9][0-9][0-9])?.jpg$/gims;
-	$year = "$year-$year2" if $year2;
+	my ($number, $cl, $pt, $descr, $fullyear, $year) = $drawing =~ /^(\d+)\. (\w\w)\/(\w\w) (.+? mm) (.*?)(\d\d)$/gims;
+	my $filename = "$number $cl$pt$year.jpeg";
+	my $title = "$cl/$pt";
 	print <<"EOT";
-	<li>
-		<a class="thumb" name="$title" href="images/year/$filename" title="$title">
-			<img src="images/$year/$filename-thumb.jpg" alt="$title" />
-		</a>
-		<div class="caption">
-			<div class="image-title">$title, oil/canvas: $size (diagonal)<br />$year</div>
-			<div class="image-desc"></div>
-		</div>
-	</li>
+                    <li>
+                        <a class="thumb" name="$title" href="images/drawing/$filename" title="$title">
+                            <img class="lazyload" data-src="images/drawing/$filename" alt="$title" />
+                        </a>
+                        <div class="caption">
+                            <div class="image-title">$title<br/>$descr<br/>$fullyear$year</div>
+                            <div class="image-desc"></div>
+                        </div>
+                    </li> 
 EOT
 }
